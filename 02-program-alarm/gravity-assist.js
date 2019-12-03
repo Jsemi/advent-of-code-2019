@@ -17,19 +17,15 @@ const gravityAssist = (stack, idx = 0) => {
   }
 }
 
-const initialize = (noun, verb) =>
-  R.compose(R.update(2, verb), R.update(1, noun))
-
 const formatData = R.compose(R.map(Number), R.split(','), R.trim)
 
-const calculate = R.compose(
-  R.head,
-  gravityAssist,
-  R.curry(initialize)(12)(2),
-  formatData
-)
+const calculate = (noun, verb) =>
+  R.compose(
+    R.head,
+    gravityAssist,
+    R.update(2, verb),
+    R.update(1, noun),
+    formatData
+  )
 
-module.exports = {
-  gravityAssist,
-  calculate,
-}
+module.exports = calculate
